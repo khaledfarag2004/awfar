@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\ForgetPasswordRequest;
@@ -9,12 +9,10 @@ use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Http\Requests\Api\Auth\ResendOtpRequest;
 use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\VerifyOtpRequest;
-use App\Servce\Auth\AuthService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-
+use App\Servce\Auth\AuthService;
+use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     protected $authService;
@@ -24,7 +22,7 @@ class AuthController extends Controller
     }
     public function login(LoginRequest $request)
     {
-        $request->validated();
+        $data = $request->validated();
 
         $login = $this->authService->login($request->phone, $request->password);
 
@@ -48,7 +46,7 @@ class AuthController extends Controller
 
         $user = $this->authService->register($data);
 
-        $user->load(['country', 'city']);
+        $user->load('city');
 
         return response()->json([
             'status' => true,
@@ -58,11 +56,18 @@ class AuthController extends Controller
     }
     public function verifyOtp(VerifyOtpRequest $request)
     {
-        $request->validated();
+        $data = $request->validated();
 
-        $user = User::find($request->user_id);
+        $user = auth()->user();
 
-        if ($user && $user->otp === $request->otp && $user->otp_expires_at > now()) {
+        if (!$user) {
+            return response()->json(['status' => false, 'message' => 'User not authenticated'], 401);
+        }
+
+        if ((string)$user->otp === (string)$data['otp']
+            && $user->otp_expires_at
+            && now()->lessThan($user->otp_expires_at)) {
+
             $user->update([
                 'email_verified_at' => now(),
                 'otp' => null,
@@ -83,9 +88,14 @@ class AuthController extends Controller
     }
     public function resendOtp(ResendOtpRequest $request)
     {
-        $request->validated();
+        $data = $request->validated();
+        $data['phone'] = '+966' . $data['phone'];
 
-        $user = User::find($request->user_id);
+        $user = User::where('phone', $data['phone'])->first();
+
+        if (!$user) {
+            return response()->json(['status' => false, 'message' => 'User not found'], 404);
+        }
 
         $otp = rand(1000, 9999);
 
@@ -100,13 +110,25 @@ class AuthController extends Controller
     }
     public function forgetPassword(ForgetPasswordRequest $request)
     {
-        $request->validated();
-        $user = User::where('phone', $request->phone)->first();
+        $data = $request->validated();
+        $data['phone'] = '+966' . $data['phone'];
+
+        $user = User::where('phone', $data['phone'])->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not found'
+            ], 404);
+        }
+
         $otp = rand(1000, 9999);
+
         $user->update([
             'otp' => $otp,
             'otp_expires_at' => now()->addMinutes(10),
         ]);
+
         return response()->json([
             'status' => true,
             'message' => 'OTP sent successfully'
@@ -114,20 +136,26 @@ class AuthController extends Controller
     }
     public function resetPassword(ResetPasswordRequest $request)
     {
-        $request->validated();
-        $user = User::where('phone', $request->phone)->first();
+        $data = $request->validated();
+
+        $user = auth()->user();
+
         if (!$user) {
             return response()->json([
                 'status' => false,
                 'message' => 'User not found'
             ], 404);
         }
+
         $user->update([
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($data['password']),
             'otp' => null,
-            'otp_expires_at' => null
+            'otp_expires_at' => null,
         ]);
 
-        return response()->json(['status' => true, 'message' => 'Password reset successfully']);
+        return response()->json([
+            'status' => true,
+            'message' => 'Password reset successfully'
+        ]);
     }
 }

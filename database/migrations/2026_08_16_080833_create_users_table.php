@@ -16,13 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('email')->unique();
-            $table->foreignId('country_id')
-                ->constrained('countries')
-                ->cascadeOnDelete();
             $table->foreignId('city_id')
                 ->constrained('cities')
                 ->cascadeOnDelete();
+            $table->string('role')->default('customer');
             $table->string('otp')->nullable();
+            $table->string('type')->default('client');
             $table->boolean('verified')->default(false);
             $table->timestamp('otp_expires_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();

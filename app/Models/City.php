@@ -10,4 +10,12 @@ class City extends Model
         'name',
         'status',
     ];
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+    public function country() {
+        return $this->belongsTo(Country::class);
+    }
 }
+

@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code', 5);
-            $table->string('iso', 5)->nullable();
-            $table->boolean('status')->default(true);
+            $table->string('name')->unique();
+            $table->string('logo');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
-
     }
 
     /**
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('brands');
     }
 };

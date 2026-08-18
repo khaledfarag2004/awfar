@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class Category extends Model
 {
     protected $fillable = [
         'name',
-        'code',
+        'image',
         'status',
-        'iso'
     ];
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

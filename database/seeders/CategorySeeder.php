@@ -2,20 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\City;
-use Illuminate\Container\Attributes\DB;
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CitySeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        City::create([
-            'name' => 'mansora',
+        Category::create([
+            'name' => 'عصائر',
+            'image' => 'images/categories/default.png',
         ]);
     }
 }

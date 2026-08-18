@@ -16,6 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
     'email',
     'city_id',
     'verified',
+    'role',
     'country_id',
     'otp_expires_at',
     'otp',
@@ -37,10 +38,6 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
     }
 
     public function city()
