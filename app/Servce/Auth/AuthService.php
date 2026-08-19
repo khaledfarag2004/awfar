@@ -16,10 +16,9 @@ class AuthService
     {
         $user = $this->authRepo->createUser([
             'name'       => $data['name'],
-            'phone'      => $data['phone'],
+            'phone'      => '+966' . $data['phone'],
             'email'      => $data['email'] ?? null,
             'city_id'    => $data['city_id'],
-            'country_id' => $data['country_id'],
             'password'   => Hash::make($data['password']),
         ]);
 
@@ -33,7 +32,9 @@ class AuthService
     }
     public function login($phone, $password)
     {
+        $phone = '+966' . $phone;
         $user = $this->authRepo->findByPhone($phone);
+
         if ($user && Hash::check($password, $user->password)) {
             $token = $user->createToken('authToken')->plainTextToken;
             return ['user' => $user, 'token' => $token];

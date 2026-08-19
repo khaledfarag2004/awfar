@@ -16,7 +16,6 @@ class CitySeeder extends Seeder
     {
         City::create([
             'name' => 'mansora',
-            'country_id' => 1,
         ]);
     }
 }

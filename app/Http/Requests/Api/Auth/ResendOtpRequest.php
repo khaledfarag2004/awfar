@@ -23,8 +23,8 @@ class ResendOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
-
+//            'user_id' => 'required|exists:users,id',
+        'phone' => 'required|regex:/^5[0-9]{8}$/',
         ];
     }
 }
