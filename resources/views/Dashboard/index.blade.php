@@ -27,21 +27,23 @@
         </div>
 
         <nav class="sidebar-nav">
-            <a class="nav-link active" href="index.html" aria-current="page">
+            <a class="nav-link active" href="{{ route('dashboard') }}" aria-current="page">
                 <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
                 <span class="nav-text">Dashboard</span>
             </a>
-            <a class="nav-link" href="users.html">
+            <a class="nav-link" href="{{ route('user.index') }}">
                 <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
                 <span class="nav-text">Users</span>
             </a>
-            <a class="nav-link" href="add-user.html">
+
+            <a class="nav-link" href="{{ route('products.index') }}">
                 <span class="nav-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
-                <span class="nav-text">Add User</span>
+                <span class="nav-text">Products</span>
             </a>
-            <a class="nav-link" href="profile.html">
+
+            <a class="nav-link" href="{{ route('categories.index') }}">
                 <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
-                <span class="nav-text">Profile</span>
+                <span class="nav-text">Category</span>
             </a>
             <a class="nav-link" href="charts.html">
                 <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>

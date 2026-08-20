@@ -58,13 +58,6 @@
                 </div>
             </section>
 
-
-
-
-
-
-
-
             <section class="panel mt-3">
                 <div class="panel-header">
                     <div>
@@ -105,7 +98,7 @@
                                 <td>{{ $user->created_at }}
                                 <p>{{ $user->updated_at }}</p>
                                 </td>
-                                <td class="text-end"><a class="btn btn-light btn-sm" href="user-details.html">View</a></td>
+                                <td class="text-end"><a class="btn btn-light btn-sm" href="{{ route('user.show', $user->id) }}">View</a></td>
                             </tr>
                             @endforeach
 
