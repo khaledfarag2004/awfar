@@ -17,7 +17,7 @@ class CategoryController extends Controller
         $data = $this->categoryServices->getAllCategories();
         return response()->json([
             'success' => true,
-            'message' => 'All Categories',
+            'message' => 'جميع الفئات',
             'data' => $data
         ]);
     }

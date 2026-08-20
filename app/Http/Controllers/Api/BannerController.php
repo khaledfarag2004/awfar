@@ -18,7 +18,7 @@ class BannerController extends Controller
         $data = $this->bannerServices->getAllBanners();
         return response()->json([
             'success' => true,
-            'message' => 'All Banners',
+            'message' => 'جميع البانرات',
             'data' => $data,
         ]);
     }

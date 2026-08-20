@@ -27,4 +27,13 @@ class LoginRequest extends FormRequest
             'password' => 'required|string|min:6',
         ];
     }
+    public function messages(): array{
+        return [
+            'phone.required' => 'رقم الهاتف مطلوب',
+            'phone.regex' => 'رقم الهاتف خطا',
+            'password.required' => 'كلمة المرور مطلوبه',
+            'password.min' => 'كلمة المرور اقل من 6 ارقام',
+
+        ];
+    }
 }

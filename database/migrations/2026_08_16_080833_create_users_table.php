@@ -19,10 +19,11 @@ return new class extends Migration
             $table->foreignId('city_id')
                 ->constrained('cities')
                 ->cascadeOnDelete();
-            $table->string('role')->default('customer');
             $table->string('otp')->nullable();
-            $table->string('type')->default('client');
-            $table->boolean('verified')->default(false);
+            $table->enum('type', ['client', 'delivery','admin'])->default('client');
+            $table->string('country_code',5)->default('965');
+            $table->boolean('is_active')->default(false);
+            $table->boolean('is_blocked')->default(false);
             $table->timestamp('otp_expires_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

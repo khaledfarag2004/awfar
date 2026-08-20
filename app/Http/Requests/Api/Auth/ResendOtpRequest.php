@@ -23,8 +23,13 @@ class ResendOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'user_id' => 'required|exists:users,id',
         'phone' => 'required|regex:/^5[0-9]{8}$/',
+        ];
+    }
+    public function messages(): array{
+        return [
+            'phone.regex'    => 'رقم الهاتف يجب أن يبدأ بالرقم 5 ويتكون من 9 أرقام.',
+            'phone.required' => 'رقم الهاتف مطلوب.',
         ];
     }
 }

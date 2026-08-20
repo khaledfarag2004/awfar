@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class VerifyOtpRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,10 @@ class VerifyOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'otp' => 'required'
-        ];
-    }
-    public function messages(): array{
-        return [
-            'otp.required' => 'كود التاكيد مطلوب'
+            'name' => 'required|string|max:150|min:3',
+            'phone' => 'required|string|regex:/^5[0-9]{8}$/',
+            'email' => 'string|email|max:255|unique:users,email,',
+            'city_id' => 'required',
         ];
     }
 }

@@ -26,4 +26,10 @@ class ForgetPasswordRequest extends FormRequest
             'phone' => 'required|regex:/^5[0-9]{8}$/'
         ];
     }
+    public function messages(): array{
+        return [
+            'phone.required' => 'رقم الهاتف مطلوب.',
+            'phone.regex'    => 'رقم الهاتف يجب أن يبدأ بالرقم 5 ويتكون من 9 أرقام.',
+        ];
+    }
 }

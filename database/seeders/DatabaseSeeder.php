@@ -28,11 +28,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'phone' => '500100100',
-            'password' => bcrypt('123456789'),
-            'verified' => true,
+            'password' => bcrypt('khaled'),
             'city_id' => 1,
             'type' => 'admin',
-            'role' => 'admin',
+            'is_active' => true,
+            'is_blocked' => false,
         ]);
 
     }

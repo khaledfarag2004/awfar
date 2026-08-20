@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class VerifyOtpRequest extends FormRequest
+class UpdatePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,8 @@ class VerifyOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'otp' => 'required'
-        ];
-    }
-    public function messages(): array{
-        return [
-            'otp.required' => 'كود التاكيد مطلوب'
+            'current_password' => 'required',
+            'new_password'     => 'required|min:6|confirmed',
         ];
     }
 }

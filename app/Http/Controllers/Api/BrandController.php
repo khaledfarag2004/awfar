@@ -18,7 +18,7 @@ class BrandController extends Controller
         $data = $this->brandService->getAllBrand();
         return response()->json([
             'success' => true,
-            'message' => 'All Brands',
+            'message' => 'قائمة البراندات الرئيسيه',
             'data' => $data
         ]);
     }

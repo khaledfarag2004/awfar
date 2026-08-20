@@ -1,17 +1,25 @@
 <?php
 namespace App\Servce;
 
+use App\Models\User;
+use App\Repositories\ProfileRepository;
 
-use App\Models\Banner;
-use App\Repositories\BannerRepository;
-use App\Repositories\BrandRepository;
+class ProfileService{
+    protected $profileRepo;
+    public function __construct(ProfileRepository $profileRepo){
+        $this->profileRepo = $profileRepo;
+    }
+    public function updateProfile(int $id, array $data)
+    {
+        return $this->profileRepo->updateProfile($id, $data);
+    }
+    public function getProfile(int $id)
+    {
+        return $this->profileRepo->getProfile($id);
+    }
+    public function changePassword(int $id, array $data)
+    {
+        return $this->profileRepo->changePassword($id, $data);
+    }
 
-class BrandService{
-    protected $brandRepo;
-    public function __construct(BrandRepository $brandRepo){
-        $this->brandRepo = $brandRepo;
-    }
-    public function getAllBrand(){
-        return $this->brandRepo->getAllBrands();
-    }
 }
