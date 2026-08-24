@@ -1,5 +1,5 @@
 <?php
-namespace App\Servce;
+namespace App\Services;
 
 use App\Models\User;
 use App\Repositories\ProfileRepository;

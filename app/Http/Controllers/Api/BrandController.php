@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Servce\BrandService;
+use App\Services\BrandService;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller

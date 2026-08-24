@@ -11,7 +11,7 @@ use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\Auth\VerifyOtpRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Servce\Auth\AuthService;
+use App\Services\Auth\AuthService;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller

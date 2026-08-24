@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdatePasswordRequest;
-use App\Http\Requests\UpdateProfileRequest;
-use App\Http\Resources\ProductResource;
+use App\Http\Requests\Api\UpdatePasswordRequest;
+use App\Http\Requests\Api\UpdateProfileRequest;
 use App\Http\Resources\ProfileResource;
-use App\Models\User;
-use App\Servce\ProfileService;
-use Illuminate\Http\Request;
+use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {

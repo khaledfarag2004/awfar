@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'phone'    => 'required|unique:users|regex:/^5[0-9]{8}$/',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
             'name'     => 'required|string|max:255',
             'email'    => 'nullable|unique:users|email',
             'city_id'  => ['required', 'exists:cities,id'],

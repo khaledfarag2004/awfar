@@ -5,11 +5,12 @@ use App\Models\Category;
 use App\Models\Product;
 
 class ProductsRepository {
+    public function findById(int $id)
+    {
+        return Product::find($id);
+    }
     public function getAllProducts(){
         return Product::with('category')->get();
     }
-    public function findById(Product $product)
-    {
-        return $product->load(['category', 'brand']);
-    }
+
 }

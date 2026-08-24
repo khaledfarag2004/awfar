@@ -75,7 +75,9 @@
                         @endforeach
                         </tbody>
                     </table>
-{{--                    {{ $products->links() }}--}}
+                    <div class="mt-3 d-flex justify-content-center">
+                        {{ $products->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>

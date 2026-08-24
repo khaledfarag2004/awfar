@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Servce\ProductsService;
+use App\Services\ProductsService;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\HomeProductResource;
 

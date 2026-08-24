@@ -51,8 +51,10 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{ $categories->links() }}
-                </div>
+                    <div class="mt-3 d-flex justify-content-center">
+                        {{ $categories->links('pagination::bootstrap-5') }}
+                    </div>
+                                   </div>
             </div>
         </div>
     </main>

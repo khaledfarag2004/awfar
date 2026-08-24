@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\ProfileController;
-
+use App\Http\Controllers\Api\CartController;
 
 // Auth Route
 Route::post('/login',[AuthController::class,'login']);
@@ -33,3 +33,9 @@ Route::get('/brands', [BrandController::class, 'allBrands']);
 Route::get('profile/{profile}', [ProfileController::class, 'showProfile']);
 Route::put('profile/{profile}', [ProfileController::class, 'update']);
 Route::put('/profile/{id}/change-password', [ProfileController::class, 'changePassword']);
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/cart/items', [CartController::class, 'addToCart']);
+
+});

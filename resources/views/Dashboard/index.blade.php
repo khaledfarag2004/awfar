@@ -17,7 +17,7 @@
 
     <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
         <div class="sidebar-header">
-            <a class="brand-mark" href="index.html" aria-label="adminHMD dashboard">
+            <a class="brand-mark" href="{{ route('dashboard') }}" aria-label="adminHMD dashboard">
                 <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
                 <span class="brand-copy">
             <span class="brand-title">AWFAR</span>
@@ -31,59 +31,49 @@
                 <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
                 <span class="nav-text">Dashboard</span>
             </a>
+
             <a class="nav-link" href="{{ route('user.index') }}">
-                <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+                <span class="nav-icon"><i class="bi bi-people-fill" aria-hidden="true"></i></span>
                 <span class="nav-text">Users</span>
             </a>
 
             <a class="nav-link" href="{{ route('products.index') }}">
-                <span class="nav-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
+                <span class="nav-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
                 <span class="nav-text">Products</span>
             </a>
 
             <a class="nav-link" href="{{ route('categories.index') }}">
-                <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
+                <span class="nav-icon"><i class="bi bi-tags" aria-hidden="true"></i></span>
                 <span class="nav-text">Category</span>
             </a>
-            <a class="nav-link" href="charts.html">
-                <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
-                <span class="nav-text">Charts</span>
+
+            <a class="nav-link" href="{{ route('banners.index') }}">
+                <span class="nav-icon"><i class="bi bi-image" aria-hidden="true"></i></span>
+                <span class="nav-text">Banners</span>
             </a>
-            <a class="nav-link" href="tables.html">
-                <span class="nav-icon"><i class="bi bi-table" aria-hidden="true"></i></span>
-                <span class="nav-text">Tables</span>
+
+            <a class="nav-link" href="{{ route('brands.index') }}">
+                <span class="nav-icon"><i class="bi bi-building" aria-hidden="true"></i></span>
+                <span class="nav-text">Brands</span>
             </a>
-            <a class="nav-link" href="forms.html">
-                <span class="nav-icon"><i class="bi bi-ui-checks-grid" aria-hidden="true"></i></span>
-                <span class="nav-text">Forms</span>
+
+            <a class="nav-link" href="{{ route('cities.index') }}">
+                <span class="nav-icon"><i class="bi bi-geo-alt" aria-hidden="true"></i></span>
+                <span class="nav-text">City</span>
             </a>
-            <a class="nav-link" href="components.html">
-                <span class="nav-icon"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i></span>
-                <span class="nav-text">Components</span>
+
+            <a class="nav-link" href="{{ route('order.index') }}">
+                <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
+                <span class="nav-text">Cart</span>
             </a>
-            <a class="nav-link" href="alerts.html">
-                <span class="nav-icon"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i></span>
-                <span class="nav-text">Alerts</span>
-            </a>
-            <a class="nav-link" href="modals.html">
-                <span class="nav-icon"><i class="bi bi-window-stack" aria-hidden="true"></i></span>
-                <span class="nav-text">Modals</span>
-            </a>
+
             <a class="nav-link" href="settings.html">
                 <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
                 <span class="nav-text">Settings</span>
             </a>
-            <a class="nav-link" href="blank.html">
-                <span class="nav-icon"><i class="bi bi-file-earmark" aria-hidden="true"></i></span>
-                <span class="nav-text">Blank Page</span>
-            </a>
+
         </nav>
 
-        <div class="sidebar-user">
-            <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="Admin Hasan">
-            <strong>Admin Hasan</strong>
-            <small>Active Workspace</small>
-        </div>
 
         <div class="sidebar-footer">
             <span class="status-dot"></span>

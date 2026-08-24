@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call(CitySeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(BrandSeeder::class);
@@ -34,6 +33,7 @@ class DatabaseSeeder extends Seeder
             'is_active' => true,
             'is_blocked' => false,
         ]);
+        User::factory(100)->create();
 
     }
 }
