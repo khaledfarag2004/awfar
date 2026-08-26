@@ -16,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
     'email',
     'city_id',
     'verified',
-    'country_id',
+    'country_code',
     'otp_expires_at',
     'otp',
     'password',

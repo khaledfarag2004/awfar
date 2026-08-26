@@ -23,12 +23,9 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Description</th>
                             <th scope="col">Price</th>
                             <th scope="col">Category</th>
-                            <th scope="col">Brand</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Image</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -38,10 +35,8 @@
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->description }}</td>
                                 <td>{{ $product->price }} SAR</td>
                                 <td>{{ $product->category->name ?? 'N/A' }}</td>
-                                <td>{{ $product->brand->name ?? 'N/A' }}</td>
                                 <td>
                                     @if($product->status)
                                         <span class="badge bg-success">Active</span>
@@ -49,9 +44,7 @@
                                         <span class="badge bg-danger">Inactive</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <img src="{{ asset($product->image) }}" alt="Product Image" width="60">
-                                </td>
+
                                 <td>{{ $product->created_at->format('Y-m-d H:i') }}</td>
                                 <td>
                                     <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">

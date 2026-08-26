@@ -24,10 +24,14 @@ class RegisterRequest extends FormRequest
     {
         return [
             'phone'    => 'required|unique:users|regex:/^5[0-9]{8}$/',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|confirmed',
             'name'     => 'required|string|max:255',
             'email'    => 'nullable|unique:users|email',
             'city_id'  => ['required', 'exists:cities,id'],
+            'type' => 'required|string|in:client,delivery,admin',
+            'country_code' => 'required|digits:3',
+            'terms' => 'required|accepted',
+
         ];
     }
 
@@ -55,6 +59,18 @@ class RegisterRequest extends FormRequest
 
             'city_id.required' => 'المدينة مطلوبة.',
             'city_id.exists'   => 'المدينة المختارة غير موجودة.',
+
+            'type.required' => 'النوع مطلوب.',
+            'type.string'   => 'النوع يجب أن يكون نصاً.',
+            'type.in'       => 'النوع يجب أن يكون إما عميل أو مندوب أو مدير.',
+
+            'country_code.required' => 'كود الدولة مطلوب.',
+            'country_code.string'   => 'كود الدولة يجب أن يكون نصاً.',
+            'country_code.size'     => 'كود الدولة يجب أن يتكون من 3 أرقام أو أحرف.',
+
+            'terms.required' => 'يجب الموافقة على الشروط.',
+            'terms.accepted' => 'يجب أن توافق على الشروط والأحكام.',
+
         ];
     }
 }

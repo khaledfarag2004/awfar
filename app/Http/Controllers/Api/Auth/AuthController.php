@@ -12,6 +12,7 @@ use App\Http\Requests\Api\Auth\VerifyOtpRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\Auth\AuthService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -43,7 +44,6 @@ class AuthController extends Controller
             'message' => 'بيانات الدخول غير صحيحة.',
         ], 401);
     }
-
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
@@ -93,7 +93,7 @@ class AuthController extends Controller
     public function resendOtp(ResendOtpRequest $request)
     {
         $data = $request->validated();
-        $data['phone'] = '+965' . $data['phone'];
+        $data['phone'] = '+966' . $data['phone'];
 
         $user = User::where('phone', $data['phone'])->first();
 
@@ -117,7 +117,7 @@ class AuthController extends Controller
     public function forgetPassword(ForgetPasswordRequest $request)
     {
         $data = $request->validated();
-        $data['phone'] = '+965' . $data['phone'];
+        $data['phone'] = '+966' . $data['phone'];
 
         $user = User::where('phone', $data['phone'])->first();
 
@@ -163,5 +163,23 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'تم تغيير كلمة المرور بنجاح.'
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No authenticated user'
+            ], 401);
+        }
+
+        $request->user()->currentAccessToken()->delete();        return response()->json([
+            'status' => true,
+            'message' => 'تم تسجيل الخروج بنجاح'
+        ]);
+
     }
 }

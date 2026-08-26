@@ -1,6 +1,5 @@
 @extends('Dashboard.index')
 @section('content')
-    <div class="admin-main">
         <main class="dashboard-content">
             <div class="container-fluid px-3 px-lg-4 py-2">
 
@@ -146,5 +145,5 @@
 
             </div>
         </main>
-    </div>
+
 @endsection

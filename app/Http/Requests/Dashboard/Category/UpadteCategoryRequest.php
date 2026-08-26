@@ -23,8 +23,10 @@ class UpadteCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:150|unique:categories,name,' . $category->id,
-
+            'name' => 'required|string|max:150|unique:categories,name,' . $this->category->id,
+            'status' => 'required|in:1,0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ];
     }
+
 }
