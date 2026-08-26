@@ -16,11 +16,14 @@ use Laravel\Sanctum\HasApiTokens;
     'email',
     'city_id',
     'verified',
-    'role',
     'country_id',
     'otp_expires_at',
     'otp',
-    'password',])]
+    'password',
+    'type',
+    'is_active',
+    'is_blocked',
+    ])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -43,5 +46,15 @@ class User extends Authenticatable
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

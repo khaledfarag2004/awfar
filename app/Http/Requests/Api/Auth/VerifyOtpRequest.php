@@ -26,4 +26,9 @@ class VerifyOtpRequest extends FormRequest
             'otp' => 'required'
         ];
     }
+    public function messages(): array{
+        return [
+            'otp.required' => 'كود التاكيد مطلوب'
+        ];
+    }
 }

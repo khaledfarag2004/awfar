@@ -26,4 +26,16 @@ class ResetPasswordRequest extends FormRequest
             'password' => 'required|min:6|confirmed'
         ];
     }
+
+    /**
+     * Custom validation messages in Arabic
+     */
+    public function messages(): array
+    {
+        return [
+            'password.required'  => 'كلمة المرور مطلوبة.',
+            'password.min'       => 'كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.',
+            'password.confirmed' => 'تأكيد كلمة المرور غير مطابق.',
+        ];
+    }
 }

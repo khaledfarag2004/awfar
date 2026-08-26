@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Servce\BrandService;
+use App\Services\BrandService;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -18,7 +18,7 @@ class BrandController extends Controller
         $data = $this->brandService->getAllBrand();
         return response()->json([
             'success' => true,
-            'message' => 'All Brands',
+            'message' => 'قائمة البراندات الرئيسيه',
             'data' => $data
         ]);
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Servce\CategoryService;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -17,7 +17,7 @@ class CategoryController extends Controller
         $data = $this->categoryServices->getAllCategories();
         return response()->json([
             'success' => true,
-            'message' => 'All Categories',
+            'message' => 'جميع الفئات',
             'data' => $data
         ]);
     }

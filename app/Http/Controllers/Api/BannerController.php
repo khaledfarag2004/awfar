@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
-use App\Servce\BannerService;
+use App\Services\BannerService;
 use Illuminate\Http\Request;
 
 class BannerController extends Controller
@@ -18,7 +18,7 @@ class BannerController extends Controller
         $data = $this->bannerServices->getAllBanners();
         return response()->json([
             'success' => true,
-            'message' => 'All Banners',
+            'message' => 'جميع البانرات',
             'data' => $data,
         ]);
     }

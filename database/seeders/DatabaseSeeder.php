@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call(CitySeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(BrandSeeder::class);
@@ -28,12 +27,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'phone' => '500100100',
-            'password' => bcrypt('123456789'),
-            'verified' => true,
+            'password' => bcrypt('khaled'),
             'city_id' => 1,
             'type' => 'admin',
-            'role' => 'admin',
+            'is_active' => true,
+            'is_blocked' => false,
         ]);
+        User::factory(100)->create();
 
     }
 }

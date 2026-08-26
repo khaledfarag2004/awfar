@@ -1,5 +1,5 @@
 <?php
-namespace App\Servce;
+namespace App\Services;
 
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
