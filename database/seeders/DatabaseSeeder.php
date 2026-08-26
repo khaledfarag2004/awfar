@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'is_active' => true,
             'is_blocked' => false,
         ]);
-        User::factory(100)->create();
+        User::factory(20)->create();
 
     }
 }

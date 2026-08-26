@@ -14,22 +14,27 @@ class AuthService
     }
     public function register(array $data)
     {
+
         $user = $this->authRepo->createUser([
-            'name'       => $data['name'],
-            'phone'      => '+966' . $data['phone'],
-            'email'      => $data['email'] ?? null,
-            'city_id'    => $data['city_id'],
-            'password'   => Hash::make($data['password']),
+            'name'     => $data['name'],
+            'phone'    => $data['phone'],
+            'email'    => $data['email'] ?? null,
+            'city_id'  => $data['city_id'],
+            'type'     => $data['type'],
+            'country_code' => $data['country_code'],
+            'password' => Hash::make($data['password']),
         ]);
 
         $otp = rand(1000, 9999);
 
         $user->update([
-            'otp' => $otp,
+            'otp'            => $otp,
             'otp_expires_at' => now()->addMinutes(10),
         ]);
+
         return $user;
     }
+
     public function login($phone, $password)
     {
         $phone = '+966' . $phone;

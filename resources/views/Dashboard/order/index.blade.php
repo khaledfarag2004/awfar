@@ -1,7 +1,6 @@
 @extends('Dashboard.index')
 
 @section('content')
-    <div class="admin-main">
         <main class="dashboard-content">
             <div class="container-fluid px-3 px-lg-4 py-2">
 
@@ -36,6 +35,16 @@
                                 <span class="metric-icon"><i class="bi bi-calendar-week"></i></span>
                             </div>
                             <div class="metric-value">{{ number_format($weeklyRevenue, 2) }} ج.م</div>
+                        </article>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <article class="metric-card metric-warning">
+                            <div class="metric-top">
+                                <span class="metric-label">أرباح آخر شهر</span>
+                                <span class="metric-icon"><i class="bi bi-calendar-month"></i></span>
+                            </div>
+                            <div class="metric-value">{{ number_format($monthlyRevenue, 2) }} ج.م</div>
                         </article>
                     </div>
                 </section>
@@ -87,5 +96,4 @@
 
             </div>
         </main>
-    </div>
 @endsection

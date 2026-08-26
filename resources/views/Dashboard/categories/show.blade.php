@@ -17,6 +17,26 @@
                     <table class="table table-bordered">
                         <tr><th>ID</th><td>{{ $category->id }}</td></tr>
                         <tr><th>Name</th><td>{{ $category->name }}</td></tr>
+                        <tr>
+                            <th>Image</th>
+                            <td>
+                                @if($category->image)
+                                    <img src="{{ asset($category->image) }}" alt="Category Image" class="img-thumbnail" style="width:150px;">
+                                @else
+                                    <span class="text-muted">No Image</span>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                                @if($category->status)
+                                    <span class="badge bg-success">Active</span>
+                                @else
+                                    <span class="badge bg-danger">Inactive</span>
+                                @endif
+                            </td>
+                        </tr>
                         <tr><th>Created At</th><td>{{ $category->created_at->format('Y-m-d H:i') }}</td></tr>
                         <tr><th>Updated At</th><td>{{ $category->updated_at->format('Y-m-d H:i') }}</td></tr>
                     </table>

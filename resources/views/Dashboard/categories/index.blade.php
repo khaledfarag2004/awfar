@@ -23,6 +23,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Image</th>
+                            <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>
                         </tr>
@@ -32,6 +34,20 @@
                             <tr>
                                 <td>{{ $category->id }}</td>
                                 <td>{{ $category->name }}</td>
+                                <td>
+                                    @if($category->image)
+                                        <img src="{{ asset($category->image) }}" alt="Category Image" width="60" class="img-thumbnail">
+                                    @else
+                                        <span class="text-muted">No Image</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($category->status == 1)
+                                        <span class="badge text-bg-success">Active</span>
+                                    @else
+                                        <span class="badge text-bg-warning">Inactive</span>
+                                    @endif
+                                </td>
                                 <td>{{ $category->created_at->format('Y-m-d H:i') }}</td>
                                 <td>
                                     <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info btn-sm">
@@ -51,6 +67,7 @@
                         @endforeach
                         </tbody>
                     </table>
+
                     <div class="mt-3 d-flex justify-content-center">
                         {{ $categories->links('pagination::bootstrap-5') }}
                     </div>

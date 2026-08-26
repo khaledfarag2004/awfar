@@ -64,7 +64,7 @@
                         <h2 class="h5 mb-1 section-title"><i class="bi bi-people" aria-hidden="true"></i><span>Recent Users</span></h2>
                         <p class="text-muted mb-0">Latest account activity across the workspace.</p>
                     </div>
-                    <a class="btn btn-outline-secondary btn-sm" href="">Manage Users</a>
+                    <a class="btn btn-outline-secondary btn-sm" href="{{ route('user.index') }}">Manage Users</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-middle mb-0">

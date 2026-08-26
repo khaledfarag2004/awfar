@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AboutController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\TermsController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\BrandController;
@@ -31,3 +33,9 @@ Route::resource('cities', CityController::class)->except('show');
 
 // Cart Route
 Route::get('order',[OrderController::class,'index'])->name('order.index');
+
+// About Route
+Route::resource('about', AboutController::class)->except('destroy','store','create');
+
+//terms Route
+Route::resource('terms', TermsController::class);

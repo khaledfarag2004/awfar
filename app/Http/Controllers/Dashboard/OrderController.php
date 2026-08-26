@@ -17,9 +17,11 @@ class OrderController extends Controller
             ->sum(fn($order) =>
             $order->items->sum(fn($i) => $i->product->price * $i->quantity)
             );
-
-        return view('Dashboard.order.index', compact('orders', 'totalRevenue', 'weeklyRevenue'));
+        $monthlyRevenue = $orders->where('created_at', '>=', now()->subMonth())
+            ->sum(fn($order) =>
+            $order->items->sum(fn($i) => $i->product->price * $i->quantity)
+            );
+        return view('Dashboard.order.index', compact('orders', 'totalRevenue', 'weeklyRevenue','monthlyRevenue'));
     }
-
 
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Category;
+namespace App\Http\Requests\Dashboard\About;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoryRequest extends FormRequest
+class UpdateAboutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,9 @@ class CreateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:150|unique:categories,name',
-            'status' => 'required|in:1,0',
+            'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-
+            'status' => 'required|boolean',
         ];
     }
 }

@@ -64,14 +64,32 @@
 
             <a class="nav-link" href="{{ route('order.index') }}">
                 <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
-                <span class="nav-text">Cart</span>
+                <span class="nav-text">Orders</span>
             </a>
+
+            <!-- Pages dropdown -->
+            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#pagesMenu" role="button" aria-expanded="false" aria-controls="pagesMenu">
+                <div>
+                    <span class="nav-icon"><i class="bi bi-files" aria-hidden="true"></i></span>
+                    <span class="nav-text">Pages</span>
+                </div>
+                <i class="bi bi-caret-down"></i>
+            </a>
+            <div class="collapse" id="pagesMenu">
+                <a class="nav-link ms-4" href="{{ route('about.index') }}">
+                    <span class="nav-icon"><i class="bi bi-info-circle" aria-hidden="true"></i></span>
+                    <span class="nav-text">About</span>
+                </a>
+                <a class="nav-link ms-4" href="">
+                    <span class="nav-icon"><i class="bi bi-file-text" aria-hidden="true"></i></span>
+                    <span class="nav-text">Terms</span>
+                </a>
+            </div>
 
             <a class="nav-link" href="settings.html">
                 <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
                 <span class="nav-text">Settings</span>
             </a>
-
         </nav>
 
 
