@@ -20,7 +20,7 @@ return new class extends Migration
                 ->constrained('cities')
                 ->cascadeOnDelete();
             $table->string('otp')->nullable();
-            $table->enum('type', ['client', 'delivery','admin'])->default('client');
+            $table->enum('type' , ['client' , 'delivery'])->default('client');
             $table->string('country_code',5)->default('965');
             $table->boolean('is_active')->default(false);
             $table->boolean('is_blocked')->default(false);

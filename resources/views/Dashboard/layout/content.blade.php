@@ -6,9 +6,9 @@
                 <div class="page-heading-copy">
                     <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
                     <div>
-                        <p class="eyebrow mb-1">Overview</p>
-                        <h1 class="h3 mb-1">Dashboard</h1>
-                        <p class="text-muted mb-0">Monitor performance, sales, users, and support from one clean workspace.</p>
+                        <p class="eyebrow mb-1">{{ __("messages.overview") }}</p>
+                        <h1 class="h3 mb-1">{{ __("messages.dashboard") }}</h1>
+                        <p class="text-muted mb-0">{{ __("messages.monitor_performance") }}</p>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <div class="col-12 col-sm-6 col-xl-3">
                     <article class="metric-card metric-primary">
                         <div class="metric-top">
-                            <span class="metric-label">Users Count..</span>
+                            <span class="metric-label">{{ __("messages.users_count") }}</span>
                             <span class="metric-icon"><i class="bi bi-currency-dollar" aria-hidden="true"></i></span>
                         </div>
                         <div class="metric-value">{{ $UserCount }}</div>
@@ -28,7 +28,7 @@
                 <div class="col-12 col-sm-6 col-xl-3">
                     <article class="metric-card metric-success">
                         <div class="metric-top">
-                            <span class="metric-label">Proudacts Count</span>
+                            <span class="metric-label">{{ __("messages.products_count") }}</span>
                             <span class="metric-icon"><i class="bi bi-bag-check" aria-hidden="true"></i></span>
                         </div>
                         <div class="metric-value">{{ $ProudactCount }}</div>
@@ -39,7 +39,7 @@
                 <div class="col-12 col-sm-6 col-xl-3">
                     <article class="metric-card metric-warning">
                         <div class="metric-top">
-                            <span class="metric-label">Brand Count</span>
+                            <span class="metric-label">{{ __("messages.brand_count") }}</span>
                             <span class="metric-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
                         </div>
                         <div class="metric-value">{{ $brandCount }}</div>
@@ -49,7 +49,7 @@
                 <div class="col-12 col-sm-6 col-xl-3">
                     <article class="metric-card metric-danger">
                         <div class="metric-top">
-                            <span class="metric-label">Categorie Count</span>
+                            <span class="metric-label">{{ __("messages.categories_count") }}</span>
                             <span class="metric-icon"><i class="bi bi-life-preserver" aria-hidden="true"></i></span>
                         </div>
                         <div class="metric-value">{{ $categoriesCount }}</div>
@@ -61,14 +61,14 @@
             <section class="panel mt-3">
                 <div class="panel-header">
                     <div>
-                        <h2 class="h5 mb-1 section-title"><i class="bi bi-people" aria-hidden="true"></i><span>Recent Users</span></h2>
-                        <p class="text-muted mb-0">Latest account activity across the workspace.</p>
+                        <h2 class="h5 mb-1 section-title"><i class="bi bi-people" aria-hidden="true"></i><span>{{ __("messages.recent_users") }}</span></h2>
+                        <p class="text-muted mb-0">{{ __("messages.latest_account_activity") }}</p>
                     </div>
-                    <a class="btn btn-outline-secondary btn-sm" href="{{ route('user.index') }}">Manage Users</a>
+                    <a class="btn btn-outline-secondary btn-sm" href="{{ route('user.index', ['locale' => app()->getLocale()]) }}">{{ __("messages.manage_users") }}</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-middle mb-0">
-                        <thead><tr><th scope="col">User</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col">Joined</th><th scope="col" class="text-end">Action</th></tr></thead>
+                        <thead><tr><th scope="col">{{ __("messages.user") }}</th><th scope="col">{{ __("messages.role") }}</th><th scope="col">{{ __("messages.status") }}</th><th scope="col">{{ __("messages.joined") }}</th><th scope="col" class="text-end">{{ __("messages.actions") }}</th></tr></thead>
                         <tbody>
 
 
@@ -86,19 +86,22 @@
                                 <td>
                                     @if($user->is_active)
                                         <span class="badge text-bg-success">
-            Verified
-        </span>
+                                            {{ __("messages.verified") }}
+                                        </span>
                                     @else
                                         <span class="badge text-bg-warning">
-            Unverified
-        </span>
+                                            {{ __("messages.unverified") }}
+                                        </span>
                                     @endif
                                 </td>
 
                                 <td>{{ $user->created_at }}
                                 <p>{{ $user->updated_at }}</p>
                                 </td>
-                                <td class="text-end"><a class="btn btn-light btn-sm" href="{{ route('user.show', $user->id) }}">View</a></td>
+                                <td class="text-end"><a class="btn btn-light btn-sm" href="{{ route('user.show', [
+    'locale' => app()->getLocale(),
+    'user' => $user->id
+]) }}">{{ __("messages.view") }}</a></td>
                             </tr>
                             @endforeach
 

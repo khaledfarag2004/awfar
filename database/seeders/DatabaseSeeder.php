@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
             'phone' => '500100100',
             'password' => bcrypt('khaled'),
             'city_id' => 1,
-            'type' => 'admin',
             'is_active' => true,
             'is_blocked' => false,
         ]);

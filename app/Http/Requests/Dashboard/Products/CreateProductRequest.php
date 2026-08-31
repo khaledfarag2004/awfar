@@ -30,6 +30,7 @@ class CreateProductRequest extends FormRequest
             'description' => 'required|max:500',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required|boolean',
+            'quantity' => 'required|integer|min:1',
         ];
     }
 }

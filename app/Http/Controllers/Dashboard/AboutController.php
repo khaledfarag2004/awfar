@@ -15,19 +15,19 @@ class AboutController extends Controller
         return view('dashboard.about.index', compact('abouts'));
     }
 
-    public function show($id)
+    public function show($locale,$id)
     {
         $about = About::findOrFail($id);
         return view('Dashboard.About.show', compact('about'));
     }
 
-    public function edit($id)
+    public function edit($locale,$id)
     {
         $about = About::findOrFail($id);
         return view('Dashboard.About.edit', compact('about'));
     }
 
-    public function update(UpdateAboutRequest $request, $id)
+    public function update(UpdateAboutRequest $request,$locale, $id)
     {
         $about = About::findOrFail($id);
 
@@ -45,7 +45,7 @@ class AboutController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('about.index')->with('success', 'تم تعديل البيانات بنجاح');
+        return redirect()->route('about.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_about_updated'));
     }
 
 }

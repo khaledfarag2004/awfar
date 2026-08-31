@@ -3,9 +3,9 @@
     <main class="dashboard-content">
         <div class="container-fluid px-3 px-lg-4 py-4">
             <div class="page-heading d-flex justify-content-between align-items-center">
-                <h1 class="h3 mb-1">Products Dashboard</h1>
-                <a href="{{ route('products.create') }}" class="btn btn-success btn-sm">
-                    <i class="bi bi-plus-circle"></i> Add Product
+                <h1 class="h3 mb-1">{{ __("messages.products_dashboard") }}</h1>
+                <a href="{{ route('products.create', ['locale' => app()->getLocale()]) }}" class="btn btn-success btn-sm">
+                    <i class="bi bi-plus-circle"></i> {{ __("messages.add_product") }}
                 </a>
             </div>
 
@@ -15,19 +15,18 @@
 
             <div class="panel mt-3">
                 <div class="panel-header">
-                    <h2 class="h5 mb-1 section-title"><i class="bi bi-box-seam"></i> Products List</h2>
+                    <h2 class="h5 mb-1 section-title"><i class="bi bi-box-seam"></i> {{ __("messages.products_list") }}</h2>
                 </div>
                 <div class="panel-body">
-                    <table class="table align-middle mb-0" id="usersTable" data-searchable-table>
+                    <table class="table align-middle mb-0">
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Actions</th>
+                            <th>{{ __("messages.id") }}</th>
+                            <th>{{ __("messages.name") }}</th>
+                            <th>{{ __("messages.quantity") }}</th>
+                            <th>{{ __("messages.current_price") }}</th>
+                            <th>{{ __("messages.price_before_discount") }}</th>
+                            <th>{{ __("messages.actions") }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,27 +34,21 @@
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }} SAR</td>
-                                <td>{{ $product->category->name ?? 'N/A' }}</td>
+                                <td>{{ $product->quantity }}</td>
                                 <td>
-                                    @if($product->status)
-                                        <span class="badge bg-success">Active</span>
-                                    @else
-                                        <span class="badge bg-danger">Inactive</span>
-                                    @endif
+                                    {{ $product->price_after_discount * $product->quantity }} SAR
                                 </td>
-
-                                <td>{{ $product->created_at->format('Y-m-d H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">
+                                    {{ $product->price_before_discount }} SAR
+                                </td>
+                                <td>
+                                    <a href="{{ route('products.show', ['locale' => app()->getLocale(), 'product' => $product->id]) }}" class="btn btn-info btn-sm">
                                         <i class="bi bi-eye"></i>
                                     </a>
-
-                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('products.edit', ['locale' => app()->getLocale(), 'product' => $product->id]) }}" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('products.destroy', ['locale' => app()->getLocale(), 'product' => $product->id]) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -63,7 +56,6 @@
                                         </button>
                                     </form>
                                 </td>
-
                             </tr>
                         @endforeach
                         </tbody>

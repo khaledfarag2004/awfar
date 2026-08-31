@@ -15,34 +15,34 @@ class CategoryController extends Controller
         $categories = Category::paginate(10);
         return view('Dashboard.categories.index', compact('categories'));
     }
-    public function show(Category $category)
+    public function show($locale,Category $category,)
     {
         return view('Dashboard.categories.show', compact('category'));
     }
-    public function create()
+    public function create($locale)
     {
         return view('Dashboard.categories.create');
     }
-    public function store(CreateCategoryRequest $request)
+    public function store(CreateCategoryRequest $request,$locale)
     {
         $data = $request->validated();
         Category::create($data);
-        return redirect()->route('categories.index')->with('success', 'Category created successfully');
+        return redirect()->route('categories.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_category_created'));
     }
-    public function edit(Category $category)
+    public function edit($locale,Category $category)
     {
         return view('Dashboard.categories.edit', compact('category'));
     }
-    public function update(UpadteCategoryRequest $request, Category $category)
+    public function update(UpadteCategoryRequest $request, $locale,Category $category)
     {
         $data = $request->validated();
         $category->update($data);
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
+        return redirect()->route('categories.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_category_updated'));
     }
-    public function destroy(Category $category)
+    public function destroy(Category $category,$locale)
     {
         $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully');
+        return redirect()->route('categories.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_category_deleted'));
     }
 }
 

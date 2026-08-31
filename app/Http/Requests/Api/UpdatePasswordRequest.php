@@ -23,8 +23,18 @@ class UpdatePasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'current_password' => 'required',
-            'new_password'     => 'required|min:6|confirmed',
+            'current_password' => 'required|string',
+            'password'         => 'required|string|min:6|confirmed',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'current_password.required' => 'كلمة المرور الحالية مطلوبة.',
+            'password.required'         => 'كلمة المرور الجديدة مطلوبة.',
+            'password.min'              => 'كلمة المرور الجديدة يجب ألا تقل عن 6 أحرف.',
+            'password.confirmed'        => 'تأكيد كلمة المرور الجديدة غير مطابق.',
         ];
     }
 }

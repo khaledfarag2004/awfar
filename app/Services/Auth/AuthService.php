@@ -37,13 +37,17 @@ class AuthService
 
     public function login($phone, $password)
     {
-        $phone = '+966' . $phone;
         $user = $this->authRepo->findByPhone($phone);
 
         if ($user && Hash::check($password, $user->password)) {
             $token = $user->createToken('authToken')->plainTextToken;
-            return ['user' => $user, 'token' => $token];
+
+            return [
+                'user' => $user,
+                'token' => $token,
+            ];
         }
+
         return null;
     }
 }

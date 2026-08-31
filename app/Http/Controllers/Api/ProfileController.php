@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UpdatePasswordRequest;
 use App\Http\Requests\Api\UpdateProfileRequest;
 use App\Http\Resources\ProfileResource;
+use Illuminate\Http\Request;
 use App\Services\ProfileService;
 
 class ProfileController extends Controller
@@ -14,18 +15,21 @@ class ProfileController extends Controller
     public function __construct(ProfileService $profileService){
         $this->profileService = $profileService;
     }
-    public function showProfile(int $id)
+    public function showProfile(Request $request)
     {
-        $data = $this->profileService->getProfile($id);
+        $user = $request->user();
+
         return response()->json([
             'success' => true,
-            'message' => 'بيانات البروفايل المطلوب',
-            'data' => ProfileResource::make($data),
+            'message' => 'بيانات البروفايل الخاص بك',
+            'data'    => new ProfileResource($user),
         ]);
     }
-    public function update(UpdateProfileRequest $request, $id)
+
+    public function update(UpdateProfileRequest $request)
     {
-        $user = $this->profileService->updateProfile($id, $request->all());
+        $user = $request->user();
+        $user->update($request->validated());
 
         return response()->json([
             'status'  => true,
@@ -33,16 +37,26 @@ class ProfileController extends Controller
             'data'    => new ProfileResource($user),
         ]);
     }
-    public function changePassword(UpdatePasswordRequest $request, $id)
-    {
-        $data = $request->validated();
 
-        $user = $this->profileService->changePassword($id, $data);
+    public function changePassword(UpdatePasswordRequest $request)
+    {
+        $user = $request->user();
+        $data = $request->validated();
+        if (!\Hash::check($data['current_password'], $user->password)) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'كلمة المرور الحالية غير صحيحة.',
+            ], 403);
+        }
+        $user->update([
+            'password' => bcrypt($data['password']),
+        ]);
 
         return response()->json([
             'status'  => true,
-            'message' => 'تم تغير كلمة المرور بنجاح',
+            'message' => 'تم تغيير كلمة المرور بنجاح',
             'data'    => new ProfileResource($user),
         ]);
     }
+
 }

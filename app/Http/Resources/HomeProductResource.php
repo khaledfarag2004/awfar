@@ -17,8 +17,9 @@ class HomeProductResource extends JsonResource
         return [
             'id'       => $this->id,
             'name'     => $this->name,
-            'price'    => $this->price,
+            'price_after_discount'    => $this->price_after_discount,
             'image'    => $this->image,
+            'quantity' => $this->quantity,
             'category' => $this->category ? $this->category->name : null,
         ];
     }

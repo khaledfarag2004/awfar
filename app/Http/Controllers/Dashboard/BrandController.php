@@ -16,12 +16,12 @@ class BrandController extends Controller
         return view('Dashboard.brands.index', compact('brands'));
     }
 
-    public function create()
+    public function create($locale)
     {
         return view('Dashboard.brands.create');
     }
 
-    public function store(CreateBrandRequest $request)
+    public function store(CreateBrandRequest $request,$locale)
     {
         $data = $request->validated();
 
@@ -31,15 +31,15 @@ class BrandController extends Controller
 
         Brand::create($data);
 
-        return redirect()->route('brands.index')->with('success', 'Brand created successfully');
+        return redirect()->route('brands.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_brand_created'));
     }
 
-    public function edit(Brand $brand)
+    public function edit(Brand $brand,$locale)
     {
         return view('Dashboard.brands.edit', compact('brand'));
     }
 
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(UpdateBrandRequest $request, $locale,Brand $brand)
     {
         $data = $request->validated();
 
@@ -49,12 +49,12 @@ class BrandController extends Controller
 
         $brand->update($data);
 
-        return redirect()->route('brands.index')->with('success', 'Brand updated successfully');
+        return redirect()->route('brands.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_brand_updated'));
     }
 
-    public function destroy(Brand $brand)
+    public function destroy($locale,Brand $brand)
     {
         $brand->delete();
-        return redirect()->route('brands.index')->with('success', 'Brand deleted successfully');
+        return redirect()->route('brands.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_brand_deleted'));
     }
 }

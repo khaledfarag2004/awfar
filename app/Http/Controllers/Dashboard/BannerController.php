@@ -15,12 +15,12 @@ class BannerController extends Controller
         return view('Dashboard.banners.index', compact('banners'));
     }
 
-    public function create()
+    public function create($locale)
     {
         return view('Dashboard.banners.create');
     }
 
-    public function store(CreateBannerRequest $request)
+    public function store(CreateBannerRequest $request,$locale)
     {
         $data = $request->validated();
 
@@ -29,15 +29,15 @@ class BannerController extends Controller
         }
 
         Banner::create($data);
-        return redirect()->route('banners.index')->with('success', 'Banner created successfully');
+        return redirect()->route('banners.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_banner_created'));
     }
 
-    public function edit(Banner $banner)
+    public function edit(Banner $banner,$locale)
     {
         return view('Dashboard.banners.edit', compact('banner'));
     }
 
-    public function update(UpdateBannerRequest $request, Banner $banner)
+    public function update(UpdateBannerRequest $request,$locale, Banner $banner)
     {
         $data = $request->validated();
 
@@ -46,12 +46,12 @@ class BannerController extends Controller
         }
 
         $banner->update($data);
-        return redirect()->route('banners.index')->with('success', 'Banner updated successfully');
+        return redirect()->route('banners.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_banner_updated'));
     }
 
-    public function destroy(Banner $banner)
+    public function destroy(Banner $banner,$locale)
     {
         $banner->delete();
-        return redirect()->route('banners.index')->with('success', 'Banner deleted successfully');
+        return redirect()->route('banners.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_banner_deleted'));
     }
 }

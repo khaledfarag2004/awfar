@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->string('image')->nullable();
+            $table->decimal('price_before_discount', 8, 2)->nullable();
+            $table->decimal('price_after_discount', 8, 2)->nullable();
+            $table->integer('quantity')->default(1);
             $table->boolean('status')->default(false);
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->timestamps();

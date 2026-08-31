@@ -19,9 +19,8 @@ class ProfileResource extends JsonResource
           'phone' => $this->phone,
           'email' => $this->email,
           'city' => optional($this->city)->name,
-          'role' => $this->role,
           'type' => $this->type,
-          'verified' => $this->verified,
-        ];
+          'is_active'   => $this->is_active ? 'Active' : 'Disactive',
+          'is_blocked'  => $this->is_blocked ? 'Blocked' : 'Not Blocked',        ];
     }
 }

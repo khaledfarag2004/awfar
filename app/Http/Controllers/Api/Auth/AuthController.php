@@ -26,24 +26,33 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $data = $request->validated();
+        $request->validated();
 
-        $login = $this->authService->login($request->phone, $request->password);
+        $user = User::where('phone', $request->phone)->first();
 
-        if ($login) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'status' => true,
-                'message' => 'تم تسجيل الدخول بنجاح.',
-                'token' => $login['token'],
-                'data' => new UserResource($login['user']),
-            ]);
+                'status' => false,
+                'message' => 'بيانات الدخول غير صحيحة.',
+            ], 401);
+        }
+        if ($user->is_active == 0) {
+            return response()->json([
+                'status' => false,
+                'message' => 'الحساب غير مفعل، برجاء التفعيل.',
+            ], 403);
         }
 
+        $token = $user->createToken('auth_token')->plainTextToken;
+
         return response()->json([
-            'status' => false,
-            'message' => 'بيانات الدخول غير صحيحة.',
-        ], 401);
+            'status' => true,
+            'message' => 'تم تسجيل الدخول بنجاح',
+            'data' => $user,
+            'token' => $token,
+        ]);
     }
+
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
@@ -93,7 +102,7 @@ class AuthController extends Controller
     public function resendOtp(ResendOtpRequest $request)
     {
         $data = $request->validated();
-        $data['phone'] = '+966' . $data['phone'];
+        $data['phone'] = $data['phone'];
 
         $user = User::where('phone', $data['phone'])->first();
 
@@ -117,7 +126,7 @@ class AuthController extends Controller
     public function forgetPassword(ForgetPasswordRequest $request)
     {
         $data = $request->validated();
-        $data['phone'] = '+966' . $data['phone'];
+        $data['phone'] = $data['phone'];
 
         $user = User::where('phone', $data['phone'])->first();
 

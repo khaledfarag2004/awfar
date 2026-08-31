@@ -3,9 +3,9 @@
     <main class="dashboard-content">
         <div class="container-fluid px-3 px-lg-4 py-4">
             <div class="page-heading d-flex justify-content-between align-items-center">
-                <h1 class="h3 mb-1">Add Category</h1>
-                <a href="{{ route('categories.index') }}" class="btn btn-outline-secondary btn-sm">
-                    <i class="bi bi-arrow-left"></i> Back to Categories
+                <h1 class="h3 mb-1">{{ __("messages.add_category") }}</h1>
+                <a href="{{ route('categories.index', ['locale' => app()->getLocale()]) }}" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-arrow-left"></i> {{ __("messages.back_to_categories") }}
                 </a>
             </div>
 
@@ -25,35 +25,35 @@
                 </div>
             @endif
 
-            <form class="panel mt-3" method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+            <form class="panel mt-3" method="POST" action="{{ route('categories.store', ['locale' => app()->getLocale()]) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="panel-header">
-                    <h2 class="h5 mb-1 section-title"><i class="bi bi-tag"></i> Category Information</h2>
+                    <h2 class="h5 mb-1 section-title"><i class="bi bi-tag"></i> {{ __("messages.category_information") }}</h2>
                 </div>
                 <div class="panel-body row g-3">
                     <div class="col-md-6">
-                        <label class="form-label">Name</label>
+                        <label class="form-label">{{ __("messages.name") }}</label>
                         <input class="form-control" name="name" type="text" value="{{ old('name') }}" required>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label" for="status">Status</label>
+                        <label class="form-label" for="status">{{ __("messages.status") }}</label>
                         <select class="form-select" id="status" name="status" required>
-                            <option value="">Choose status</option>
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
+                            <option value="">{{ __("messages.choose_status") }}</option>
+                            <option value="1">{{ __("messages.active") }}</option>
+                            <option value="0">{{ __("messages.inactive") }}</option>
                         </select>
-                        <div class="invalid-feedback">يجب اختيار الحالة.</div>
+                        <div class="invalid-feedback">{{ __("messages.choose_status") }}</div>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label" for="image">Image</label>
+                        <label class="form-label" for="image">{{ __("messages.image") }}</label>
                         <input class="form-control" id="image" name="image" type="file" accept="image/*">
                     </div>
 
                     <div class="col-12 text-end">
                         <button type="submit" class="btn btn-success btn-sm">
-                            <i class="bi bi-save"></i> Create Category
+                            <i class="bi bi-save"></i> {{ __("messages.create_category") }}
                         </button>
                     </div>
                 </div>

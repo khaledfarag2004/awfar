@@ -35,9 +35,11 @@ Route::get('/products/{product}', [ProductController::class, 'show']);
 Route::get('/brands', [BrandController::class, 'allBrands']);
 
 // Profile Route
-Route::get('profile/{profile}', [ProfileController::class, 'showProfile']);
-Route::put('profile/{profile}', [ProfileController::class, 'update']);
-Route::put('/profile/{id}/change-password', [ProfileController::class, 'changePassword']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'showProfile']);
+    Route::put('/profile', [ProfileController::class, 'update']);
+    Route::put('/profile/change-password', [ProfileController::class, 'changePassword']);
+});
 
 // Cart Route
 Route::middleware('auth:sanctum')->group(function () {

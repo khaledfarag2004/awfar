@@ -19,7 +19,7 @@ class UserController extends Controller
         $users = User::with('city')->paginate(10);
         return view('dashboard.users.index', compact('UserCount', 'ActiveUserCount', 'PendingUserCount', 'BlocedUserCount', 'users'));
     }
-    public function create()
+    public function create($locale)
     {
         $cities = City::all();
         return view('dashboard.users.create', compact('cities'));
@@ -27,20 +27,20 @@ class UserController extends Controller
     public function store(CreateUserRequest $request){
         $data = $request->validated();
         User::create($data);
-        return redirect()->route('user.index')->with('success', 'User created successfully');
+        return redirect()->route('user.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_user_created'));
     }
-    public function show($id)
+    public function show($locale, $id)
     {
         $user = User::with('city')->findOrFail($id);
         return view('dashboard.users.show', compact('user'));
     }
-    public function edit($id){
+    public function edit($locale,$id){
 
         $user = User::findOrFail($id);
         $cities = City::all();
         return view('dashboard.users.edit', compact('user', 'cities'));
     }
-    public function update(UpdateUserRequest $request,User $user){
+    public function update(UpdateUserRequest $request,$locale,User $user){
         $data = $request->validated();
         if (empty($data['password'])) {
             unset($data['password']);
@@ -48,11 +48,11 @@ class UserController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
         $user->update($data);
-        return redirect()->route('user.index')->with('success', 'User updated successfully');
+        return redirect()->route('user.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_user_updated'));
     }
-    public function destroy(User $user)
+    public function destroy($locale,User $user)
     {
         $user->delete();
-        return redirect()->route('user.index');
+        return redirect()->route('user.index', ['locale' => app()->getLocale()])->with('success', __('messages.success_user_deleted'));
     }
 }

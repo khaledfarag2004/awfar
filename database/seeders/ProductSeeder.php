@@ -16,7 +16,8 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'عصير برتقال',
             'description' => 'وصف.',
-            'price' => '5',
+            'price_after_discount' => '5',
+            'price_before_discount' => '20',
             'category_id' => 1,
             'image' => 'images/categories/default.png',
             'brand_id' => 1,

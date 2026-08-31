@@ -8,14 +8,14 @@
                     <div class="page-heading-copy d-flex align-items-center gap-2">
                         <span class="page-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
                         <div>
-                            <p class="eyebrow mb-1">Management</p>
-                            <h1 class="h3 mb-1">Users</h1>
-                            <p class="text-muted mb-0">Review accounts, roles, account status, and team ownership.</p>
+                            <p class="eyebrow mb-1">{{ __("messages.management") }}</p>
+                            <h1 class="h3 mb-1">{{ __("messages.users") }}</h1>
+                            <p class="text-muted mb-0">{{ __("messages.review_accounts") }}</p>
                         </div>
                     </div>
                     <div class="heading-actions">
-                        <a class="btn btn-primary btn-sm" href="{{ route('user.create') }}">
-                            <i class="bi bi-person-plus" aria-hidden="true"></i> Add User
+                        <a class="btn btn-primary btn-sm" href="{{ route('user.create', ['locale' => app()->getLocale()]) }}">
+                            <i class="bi bi-person-plus" aria-hidden="true"></i> {{ __("messages.add_user") }}
                         </a>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="col-12 col-sm-6 col-xl-3">
                         <article class="metric-card metric-primary">
                             <div class="metric-top">
-                                <span class="metric-label">Total Users</span>
+                                <span class="metric-label">{{ __("messages.total_users") }}</span>
                                 <span class="metric-icon"><i class="bi bi-people"></i></span>
                             </div>
                             <div class="metric-value">{{ $UserCount }}</div>
@@ -35,7 +35,7 @@
                     <div class="col-12 col-sm-6 col-xl-3">
                         <article class="metric-card metric-success">
                             <div class="metric-top">
-                                <span class="metric-label">Active</span>
+                                <span class="metric-label">{{ __("messages.active") }}</span>
                                 <span class="metric-icon"><i class="bi bi-check2-circle"></i></span>
                             </div>
                             <div class="metric-value">{{ $ActiveUserCount }}</div>
@@ -45,7 +45,7 @@
                     <div class="col-12 col-sm-6 col-xl-3">
                         <article class="metric-card metric-warning">
                             <div class="metric-top">
-                                <span class="metric-label">Pending</span>
+                                <span class="metric-label">{{ __("messages.pending") }}</span>
                                 <span class="metric-icon"><i class="bi bi-hourglass-split"></i></span>
                             </div>
                             <div class="metric-value">{{ $PendingUserCount }}</div>
@@ -55,7 +55,7 @@
                     <div class="col-12 col-sm-6 col-xl-3">
                         <article class="metric-card metric-danger">
                             <div class="metric-top">
-                                <span class="metric-label">Blocked User</span>
+                                <span class="metric-label">{{ __("messages.blocked_user") }}</span>
                                 <span class="metric-icon"><i class="bi bi-slash-circle"></i></span>
                             </div>
                             <div class="metric-value">{{ $BlocedUserCount }}</div>
@@ -68,13 +68,13 @@
                     <div class="panel-header d-flex justify-content-between align-items-center mb-2">
                         <div>
                             <h2 class="h5 mb-1 section-title">
-                                <i class="bi bi-table"></i> User List
+                                <i class="bi bi-table"></i> {{ __("messages.user_list") }}
                             </h2>
-                            <p class="text-muted mb-0">Search, review, and manage team member accounts.</p>
+                            <p class="text-muted mb-0">{{ __("messages.search_review_manage") }}</p>
                         </div>
                         <div class="d-flex flex-wrap gap-2">
                             <input class="form-control form-control-sm table-search" type="search"
-                                   placeholder="Search users" data-table-search="usersTable" aria-label="Search users">
+                                   placeholder="{{ __("messages.search_users") }}" data-table-search="usersTable" aria-label="Search users">
                         </div>
                     </div>
 
@@ -82,12 +82,12 @@
                         <table class="table align-middle mb-0" id="usersTable" data-searchable-table>
                             <thead>
                             <tr>
-                                <th>User</th>
-                                <th>Role</th>
-                                <th>Blocked</th>
-                                <th>Status</th>
-                                <th>Joined</th>
-                                <th class="text-end">Action</th>
+                                <th>{{ __("messages.user") }}</th>
+                                <th>{{ __("messages.role") }}</th>
+                                <th>{{ __("messages.role_blocked") }}</th>
+                                <th>{{ __("messages.status") }}</th>
+                                <th>{{ __("messages.joined") }}</th>
+                                <th class="text-end">{{ __("messages.actions") }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -104,31 +104,31 @@
                                     <td>{{ $user->type }}</td>
                                     <td>
                                         @if($user->is_blocked == 1)
-                                            <span class="badge bg-danger">Blocked</span>
+                                            <span class="badge bg-danger">{{ __("messages.blocked") }}</span>
                                         @else
-                                            <span class="badge bg-success">Active</span>
+                                            <span class="badge bg-success">{{ __("messages.active") }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         @if($user->is_active == 1)
-                                            <span class="badge text-bg-success">Active</span>
+                                            <span class="badge text-bg-success">{{ __("messages.active") }}</span>
                                         @else
-                                            <span class="badge text-bg-warning">Inactive</span>
+                                            <span class="badge text-bg-warning">{{ __("messages.inactive") }}</span>
                                         @endif
                                     </td>
                                     <td>{{ $user->created_at->diffForHumans() }}</td>
                                     <td class="text-end">
-                                        <a class="btn btn-light btn-sm me-1" href="{{ route('user.show', $user->id) }}">
-                                            <i class="bi bi-eye"></i> View
+                                        <a class="btn btn-light btn-sm me-1" href="{{ route('user.show', ['locale' => app()->getLocale(), 'user' => $user->id]) }}">
+                                            <i class="bi bi-eye"></i> {{ __("messages.view") }}
                                         </a>
-                                        <a class="btn btn-warning btn-sm me-1" href="{{ route('user.edit', $user->id) }}">
-                                            <i class="bi bi-pencil"></i> Edit
+                                        <a class="btn btn-warning btn-sm me-1" href="{{ route('user.edit', ['locale' => app()->getLocale(), 'user' => $user->id]) }}">
+                                            <i class="bi bi-pencil"></i> {{ __("messages.edit") }}
                                         </a>
-                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('user.destroy', ['locale' => app()->getLocale(), 'user' => $user->id]) }}" method="POST" class="d-inline">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('هل أنت متأكد أنك تريد حذف هذا المستخدم؟')">
-                                                <i class="bi bi-trash"></i> Delete
+                                                    onclick="return confirm('{{ __("messages.confirm_delete_user") }}')">
+                                                <i class="bi bi-trash"></i> {{ __("messages.delete") }}
                                             </button>
                                         </form>
                                     </td>
