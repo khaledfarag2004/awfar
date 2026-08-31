@@ -26,7 +26,7 @@ class CreateProductRequest extends FormRequest
             'name' => 'required|max:150',
             'category_id' => 'required|exists:categories,id',
             'brand_id'    => 'required|exists:brands,id',
-            'price' => 'required|numeric|min:0',
+            'price_before_discount' => 'required|numeric|min:0',
             'description' => 'required|max:500',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required|boolean',

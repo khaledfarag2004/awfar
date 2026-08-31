@@ -43,8 +43,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Cart Route
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/cart/items', [CartController::class, 'addToCart']);
-    Route::post('/checkout', [CartController::class, 'checkout']);
+    Route::post('/cart/add', [CartController::class, 'addToCart']);
+    Route::get('/cart', [CartController::class, 'getCart']);
+    Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart']);
+    Route::put('/cart/update/{productId}', [CartController::class, 'updateQuantity']);
+    Route::post('/cart/checkout', [CartController::class, 'checkout']);
 });
 
 Route::get('about-us', [AboutController::class, 'index']);

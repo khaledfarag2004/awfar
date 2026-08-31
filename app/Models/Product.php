@@ -24,4 +24,8 @@ class Product extends Model
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
+    public function getPriceAttribute()
+    {
+        return $this->price_after_discount ?? $this->price_before_discount;
+    }
 }

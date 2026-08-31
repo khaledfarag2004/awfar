@@ -36,7 +36,7 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->quantity }}</td>
                                 <td>
-                                    {{ $product->price_after_discount * $product->quantity }} SAR
+                                    {{ $product->price_after_discount }} SAR
                                 </td>
                                 <td>
                                     {{ $product->price_before_discount }} SAR

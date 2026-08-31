@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AddToCartRequest;
+use App\Http\Requests\Api\UpdateCartRequest;
 use Illuminate\Http\Request;
 use App\Services\CartService;
-use App\Models\Cart;
-use App\Models\Order;
-use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -18,16 +16,32 @@ class CartController extends Controller
 
     public function addToCart(AddToCartRequest $request)
     {
-        $item = $this->cartService->addToCart(
-            auth()->id(),
-            $request->validated()
-        );
+        $item = $this->cartService->addToCart(auth()->id(), $request->validated());
 
         return response()->json([
-            'status' => true,
+            'success' => true,
             'message' => 'تم اضافه المنتج بنجاح',
-            'data' => $item,
+            'data'    => $item,
         ]);
+    }
+
+    public function getCart()
+    {
+        $result = $this->cartService->getCart(auth()->id());
+        return response()->json($result);
+    }
+
+    public function removeFromCart($productId)
+    {
+        $result = $this->cartService->removeFromCart(auth()->id(), $productId);
+        return response()->json($result);
+    }
+
+    public function updateQuantity(UpdateCartRequest $request, $productId)
+    {
+        $data = $request->validated();
+        $result = $this->cartService->updateQuantity(auth()->id(), $productId, $data['quantity']);
+        return response()->json($result);
     }
 
     public function checkout()
@@ -35,15 +49,9 @@ class CartController extends Controller
         $result = $this->cartService->checkout(auth()->id());
 
         if (!$result['success']) {
-            return response()->json([
-                'success' => false,
-                'message' => $result['message'],
-            ], 400);
+            return response()->json($result, 400);
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => $result['message'],
-            'data'    => $result['order'],
-        ]);
-    }}
+        return response()->json($result);
+    }
+}

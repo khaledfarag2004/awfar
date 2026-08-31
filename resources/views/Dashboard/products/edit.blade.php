@@ -97,11 +97,6 @@
                                value="{{ old('quantity', $product->quantity) }}" required>
                     </div>
 
-                    <div class="col-md-4">
-                        <label class="form-label">{{ __("messages.total_price_auto") }}</label>
-                        <input class="form-control" id="total_price" type="number" step="0.01" readonly>
-                    </div>
-
                     <script>
                         const priceBefore = document.getElementById('price_before');
                         const discountAmount = document.getElementById('discount_amount');

@@ -20,7 +20,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
             $table->unsignedInteger('quantity');
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }

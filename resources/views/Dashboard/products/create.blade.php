@@ -30,11 +30,6 @@
                         <input class="form-control" name="name" type="text" value="{{ old('name') }}" required>
                     </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label">{{ __("messages.price") }}</label>
-                        <input class="form-control" name="price" type="number" step="0.01" value="{{ old('price') }}" required>
-                    </div>
-
                     <div class="col-md-12">
                         <label class="form-label">{{ __("messages.description") }}</label>
                         <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
@@ -74,7 +69,7 @@
 
                     <div class="col-md-4">
                         <label class="form-label">{{ __("messages.price_before_discount") }}</label>
-                        <input class="form-control" id="price_before" name="price_before_discount" type="number" step="0.01"
+                        <input class="form-control" id="price_before_discount" name="price_before_discount" type="number" step="0.01"
                                value="{{ old('price_before_discount') }}" required>
                     </div>
 
